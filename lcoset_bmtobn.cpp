@@ -38,15 +38,16 @@ int main() {
         for(int i = 0; i < n; i++) c[i] = 1 & (num >> i);
 
         for(int i = 0; i < b.size(); i++) {
-            int t = 0;
+            int t = 0, cnt = 0;
             vector<int> temp(n);
             for(int j = 0; j < n; j++) {
                 temp[j] = c[j] ^ b[i][j];
                 t += temp[j] * (1 << j);
+                cnt += temp[j];
             }
             if(vis[t]) break;
             vis[t] = 1;
-            res.push_back({t, temp});
+            res.push_back({cnt, temp});
         }
         if(res.size()) ans.push_back(res);
     }
@@ -57,6 +58,7 @@ int main() {
     }
     for(auto &i : ans) {
         for(auto &j : i) {
+            // cout << j.fi << "  ";
             for(auto it : j.se) {
                 cout << it;
             }
